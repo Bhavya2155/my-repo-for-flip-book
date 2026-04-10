@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Akram Express | Digital Library</title>
+    <title>Akram Express | Digital Reader</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -12,8 +12,7 @@
 
     <div id="grid-view" class="container mx-auto p-10 min-h-screen">
         <h1 class="text-4xl font-bold mb-12 tracking-tight">Magazines</h1>
-        <div id="magazine-list" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
-            </div>
+        <div id="magazine-list" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8"></div>
     </div>
 
     <div id="flipbook-view" class="fixed inset-0 bg-[#0b0d11] z-50 hidden flex-col items-center justify-center">
@@ -22,14 +21,12 @@
             <span class="text-2xl">&times;</span> Close
         </button>
 
-        <div id="current-title" class="absolute top-10 text-white/20 uppercase text-[10px] tracking-[0.4em] z-[100] hidden md:block"></div>
-
-        <div id="canvas" class="relative w-full h-full flex flex-col items-center justify-center p-4 touch-none">
+        <main id="canvas" class="relative w-full h-full flex flex-col items-center justify-center p-6 md:p-12 touch-none">
             <div id="flipbook-wrapper" class="relative">
                 <div id="magazine" class="st-page-flip"></div>
             </div>
 
-            <div class="mt-10 flex flex-col items-center gap-6 z-[110]">
+            <div class="mt-8 flex flex-col items-center gap-6 z-[110]">
                 <div class="bg-[#1c2229]/90 backdrop-blur-xl border border-white/5 rounded-full px-6 py-2 flex items-center gap-8 shadow-2xl">
                     <button id="prev-btn" class="text-white/50 hover:text-white text-3xl transition">&lsaquo;</button>
                     <span id="page-counter" class="text-white/40 text-[11px] font-mono min-w-[60px] text-center italic">0 / 0</span>
@@ -37,14 +34,14 @@
                 </div>
 
                 <div class="flex items-center gap-12 text-white/20">
-                    <button id="zoom-out" class="hover:text-white transition text-3xl">&minus;</button>
-                    <button id="zoom-in" class="hover:text-white transition text-3xl">&plus;</button>
+                    <button id="zoom-out" class="text-3xl hover:text-white transition">&minus;</button>
+                    <button id="zoom-in" class="text-3xl hover:text-white transition">&plus;</button>
                     <button id="full-screen" class="hover:text-white transition">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M3 3h7v2H5v5H3V3zM17 3h-7v2h5v5h2V3zM3 17h7v-2H5v-5H3v7zM17 17h-7v-2h5v-5h2v7z"/></svg>
                     </button>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
 
     <audio id="flip-sound" src="flip.mp3" preload="auto"></audio>
