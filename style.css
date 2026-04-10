@@ -1,12 +1,11 @@
 #flipbook-wrapper {
-    transition: transform 0.2s ease-out;
-    /* Keeps the book centered for the floating look */
+    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     display: flex;
     justify-content: center;
 }
 
 .st-page-flip {
-    box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+    box-shadow: 0 50px 100px rgba(0,0,0,0.9);
 }
 
 .page {
@@ -18,16 +17,21 @@
 .page img {
     width: 100%;
     height: 100%;
-    object-fit: fill; 
+    object-fit: fill; /* Edge to edge for 1358x1004 */
     display: block;
+}
+
+.book-card {
+    transition: transform 0.4s ease;
+}
+
+.book-card:hover {
+    transform: translateY(-10px);
 }
 
 .book-card img {
     border-radius: 4px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
 }
 
-/* Removes scrollbars while viewing */
-body.overflow-hidden {
-    touch-action: none;
-}
+::-webkit-scrollbar { display: none; }
