@@ -2,45 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Magazine Flipbook Library</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Akram Express | Digital Library</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
 </head>
-<body class="bg-[#12161b] text-white font-sans">
+<body class="bg-[#0f1216] text-white selection:bg-red-500">
 
-    <div id="grid-view" class="container mx-auto p-8">
-        <header class="mb-12">
-            <h1 class="text-5xl font-black text-red-600 uppercase tracking-tighter">Magazines</h1>
-            <p class="text-gray-400 mt-2">Select a volume to start reading</p>
+    <div id="grid-view" class="container mx-auto p-6 md:p-12">
+        <header class="mb-10 flex justify-between items-end">
+            <div>
+                <h1 class="text-4xl font-black text-red-600 uppercase italic">Magazines</h1>
+                <p class="text-gray-500 text-sm mt-1">Select a volume to read</p>
+            </div>
+            <div class="hidden md:block bg-red-600 px-3 py-1 rounded text-xs font-bold">List of AEX</div>
         </header>
 
-        <div id="magazine-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div id="magazine-list" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
             </div>
     </div>
 
-    <div id="flipbook-view" class="fixed inset-0 bg-black/95 z-50 hidden flex-col items-center justify-center p-4">
+    <div id="flipbook-view" class="fixed inset-0 bg-black z-50 hidden flex-col">
         
-        <div class="w-full max-w-6xl flex justify-between items-center mb-6">
-            <button id="close-flipbook" class="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-full font-bold transition">
-                &larr; Back to Library
-            </button>
-            <h2 id="current-title" class="text-xl font-semibold italic text-gray-300"></h2>
-            <div class="w-24"></div> </div>
+        <nav class="flex justify-between items-center p-4 bg-gray-900/60 backdrop-blur-md">
+            <button id="close-flipbook" class="hover:text-red-500 transition text-2xl font-light">&times; Close</button>
+            <h2 id="current-title" class="text-xs md:text-sm font-bold tracking-widest uppercase opacity-70"></h2>
+            <div class="w-10"></div>
+        </nav>
 
-        <div id="canvas" class="relative shadow-2xl">
+        <div id="canvas" class="flex-grow flex items-center justify-center overflow-hidden relative">
             <div id="flipbook">
                 </div>
         </div>
 
-        <div class="mt-10 flex items-center gap-6 bg-gray-800/50 p-4 rounded-2xl backdrop-blur-md">
-            <button id="prev-btn" class="hover:text-red-500 font-bold text-2xl px-4">&lsaquo;</button>
-            <span id="page-counter" class="text-sm font-mono tracking-widest text-gray-400">PAGE -- / --</span>
-            <button id="next-btn" class="hover:text-red-500 font-bold text-2xl px-4">&rsaquo;</button>
-        </div>
+        <footer class="bg-gray-900/90 border-t border-gray-800 p-4 flex flex-col items-center gap-4">
+            <div class="flex items-center gap-6 bg-[#1c2229] rounded-full px-6 py-2 shadow-xl border border-gray-700">
+                <button id="prev-btn" class="text-2xl hover:text-red-500 transition">&lsaquo;</button>
+                <div id="page-counter" class="text-xs font-mono text-gray-400 min-w-[60px] text-center italic">0 / 0</div>
+                <button id="next-btn" class="text-2xl hover:text-red-500 transition">&rsaquo;</button>
+            </div>
+
+            <div class="flex items-center gap-8 text-gray-400">
+                <button id="zoom-out" class="hover:text-white text-xl" title="Zoom Out">−</button>
+                <button id="zoom-in" class="hover:text-white text-xl" title="Zoom In">+</button>
+                <button id="full-screen" class="hover:text-white" title="Toggle Fullscreen">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+                </button>
+            </div>
+        </footer>
     </div>
+
+    <audio id="flip-sound" src="flip.mp3" preload="auto"></audio>
 
     <script src="script.js"></script>
 </body>
