@@ -1,21 +1,19 @@
 document.addEventListener("DOMContentLoaded", function() {
     let pageFlip = null;
-    let zoomLevel = 1;
     const flipSound = document.getElementById('flip-sound');
 
+    // ENSURE THESE FOLDER NAMES MATCH YOUR GITHUB REPO EXACTLY
     const books = [
-        { folder: 'book1', title: 'Lord Rushabhdev - April 2026', pages: 16 },
-        { folder: 'book2', title: 'The Era Back Then - March 2026', pages: 16 }
+        { folder: 'book1', title: 'Lord Rushabhdev', pages: 16 },
+        { folder: 'book2', title: 'The Era Back Then', pages: 16 }
     ];
 
     const grid = document.getElementById('magazine-list');
     books.forEach((book, i) => {
         grid.innerHTML += `
-            <div class="book-card cursor-pointer group" onclick="openBook(${i})">
-                <div class="overflow-hidden rounded-lg">
-                    <img src="books/${book.folder}/1.jpg" class="w-full">
-                </div>
-                <p class="mt-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">${book.title}</p>
+            <div class="book-card cursor-pointer" onclick="openBook(${i})">
+                <img src="books/${book.folder}/1.jpg" class="w-full">
+                <p class="mt-4 text-[9px] uppercase tracking-widest text-gray-600 font-bold text-center">${book.title}</p>
             </div>`;
     });
 
@@ -27,8 +25,12 @@ document.addEventListener("DOMContentLoaded", function() {
         const container = document.getElementById('magazine');
         container.innerHTML = '';
         
+        // Use a loop to build the pages
         for (let i = 1; i <= book.pages; i++) {
-            container.innerHTML += `<div class="page"><img src="books/${book.folder}/${i}.jpg"></div>`;
+            const page = document.createElement('div');
+            page.className = 'page';
+            page.innerHTML = `<img src="books/${book.folder}/${i}.jpg">`;
+            container.appendChild(page);
         }
 
         const isMobile = window.innerWidth < 768;
@@ -36,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
         pageFlip = new St.PageFlip(container, {
             width: 1358, 
             height: 1004,
-            size: "contain", // FIX: Stops stretching by keeping aspect ratio
+            size: "contain",
             minWidth: 300,
             maxWidth: 1358,
             minHeight: 220,
@@ -44,8 +46,9 @@ document.addEventListener("DOMContentLoaded", function() {
             display: isMobile ? "single" : "double",
             showCover: true,
             flippingTime: 1000,
-            maxShadowOpacity: 0.3,
-            mobileScrollSupport: true
+            maxShadowOpacity: 0.4,
+            mobileScrollSupport: true,
+            clickEventForward: true // Allows clicking pages to turn
         });
 
         pageFlip.loadFromHTML(document.querySelectorAll('.page'));
@@ -53,18 +56,10 @@ document.addEventListener("DOMContentLoaded", function() {
         pageFlip.on('flip', (e) => {
             if(flipSound) { flipSound.currentTime = 0; flipSound.play(); }
             let p = e.data + 1;
-            // Improved numbering for double-page spread
             let d = (p === 1 || isMobile) ? p : (p >= book.pages ? book.pages : `${p}-${p + 1}`);
             document.getElementById('page-counter').innerText = `${d} / ${book.pages}`;
         });
     };
 
-    const wrapper = document.getElementById('flipbook-wrapper');
-    document.getElementById('zoom-in').onclick = () => { zoomLevel = Math.min(3, zoomLevel + 0.3); updateZoom(); };
-    document.getElementById('zoom-out').onclick = () => { zoomLevel = Math.max(1, zoomLevel - 0.3); updateZoom(); };
-    function updateZoom() { wrapper.style.transform = `scale(${zoomLevel})`; }
-
-    document.getElementById('prev-btn').onclick = () => pageFlip.flipPrev();
-    document.getElementById('next-btn').onclick = () => pageFlip.flipNext();
     document.getElementById('close-flipbook').onclick = () => location.reload();
 });
