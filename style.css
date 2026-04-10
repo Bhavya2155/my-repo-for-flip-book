@@ -1,10 +1,9 @@
 #flipbook-wrapper {
     transition: transform 0.2s ease-out;
-    transform-origin: center center;
 }
 
 #flipbook {
-    box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+    box-shadow: 0 50px 100px -20px rgba(0,0,0,0.8);
 }
 
 .page {
@@ -17,13 +16,10 @@
     object-fit: contain;
 }
 
-/* Make the book cards in library look clean */
-.book-card {
-    background: white;
-    border: 1px solid #eee;
-    transition: all 0.3s ease;
+/* Spine shadow effect in the middle of the book */
+#flipbook .turn-page {
+    background-color: #ccc !important;
 }
 
-.book-card:hover {
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-}
+/* Scrollbar reset */
+::-webkit-scrollbar { display: none; }
