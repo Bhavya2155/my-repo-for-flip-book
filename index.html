@@ -3,46 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Akram Express | Light Edition</title>
+    <title>Magazine Viewer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
 </head>
-<body class="bg-[#f8f9fa] text-[#1a1a1a] overflow-hidden">
+<body class="bg-[#0f1216] text-white overflow-hidden selection:bg-none">
 
     <div id="grid-view" class="container mx-auto p-10 h-screen overflow-y-auto">
-        <h1 class="text-4xl font-black text-[#d32f2f] mb-10 tracking-tighter italic">MAGAZINES</h1>
-        <div id="magazine-list" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8"></div>
+        <h1 class="text-4xl font-bold mb-10">Magazines</h1>
+        <div id="magazine-list" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6"></div>
     </div>
 
-    <div id="flipbook-view" class="fixed inset-0 bg-white/80 backdrop-blur-2xl z-50 hidden flex-col">
+    <div id="flipbook-view" class="fixed inset-0 bg-[#0f1216]/95 backdrop-blur-md z-50 hidden flex-col">
         
-        <div class="flex justify-between items-center p-6 border-b border-gray-200 bg-white/50">
-            <button id="close-flipbook" class="text-lg font-medium hover:text-red-600 transition">&larr; Exit</button>
-            <h2 id="current-title" class="text-sm font-bold tracking-widest uppercase text-gray-500"></h2>
+        <header class="flex justify-between items-center p-4">
+            <button id="close-flipbook" class="text-xl font-light hover:opacity-70 transition flex items-center gap-2">
+                <span>&times;</span> Close
+            </button>
+            <h2 id="current-title" class="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase opacity-60"></h2>
             <div class="w-10"></div>
-        </div>
+        </header>
 
-        <div id="canvas" class="flex-grow flex items-center justify-center p-4 overflow-hidden cursor-grab active:cursor-grabbing">
+        <div id="canvas" class="flex-grow flex items-center justify-center relative p-2 overflow-hidden cursor-grab active:cursor-grabbing">
             <div id="flipbook-wrapper">
                 <div id="flipbook"></div>
             </div>
         </div>
 
-        <div class="w-full flex flex-col items-center pb-8 gap-4 bg-white/60 shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-[100]">
             
-            <div class="flex items-center gap-10 bg-white px-8 py-3 rounded-full border border-gray-200 shadow-sm mt-4">
-                <button id="prev-btn" class="text-3xl text-gray-400 hover:text-red-600">&lsaquo;</button>
-                <span id="page-counter" class="text-xs font-bold tracking-widest text-gray-600 uppercase">Page 0 / 0</span>
-                <button id="next-btn" class="text-3xl text-gray-400 hover:text-red-600">&rsaquo;</button>
+            <div class="bg-[#1c2229]/90 border border-gray-700/50 rounded-full flex items-center px-4 py-1.5 shadow-2xl backdrop-blur">
+                <button id="prev-btn" class="p-2 hover:bg-gray-700 rounded-full transition text-lg">&lsaquo;</button>
+                
+                <div class="px-6 border-x border-gray-700 mx-2 flex items-center gap-2">
+                    <span id="page-counter" class="text-[11px] font-mono text-gray-400">3/32</span>
+                </div>
+                
+                <button id="next-btn" class="p-2 hover:bg-gray-700 rounded-full transition text-lg">&rsaquo;</button>
             </div>
 
-            <div class="flex items-center gap-12 text-gray-500">
-                <button id="zoom-out" class="text-4xl hover:text-red-600 transition">−</button>
-                <button id="zoom-in" class="text-4xl hover:text-red-600 transition">+</button>
-                <button id="full-screen" class="hover:text-red-600">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+            <div class="flex items-center gap-8 text-gray-400 opacity-80">
+                <button id="zoom-out" class="hover:text-white transition text-2xl">−</button>
+                <button id="zoom-in" class="hover:text-white transition text-2xl">+</button>
+                <button id="full-screen" class="hover:text-white transition">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M3 3h7v2H5v5H3V3zM17 3h-7v2h5v5h2V3zM3 17h7v-2H5v-5H3v7zM17 17h-7v-2h5v-5h2v7z"/></svg>
                 </button>
             </div>
         </div>
