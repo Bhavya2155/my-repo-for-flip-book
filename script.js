@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function() {
         { folder: 'book2', title: 'The Era Back Then - March 2026', pages: 16 }
     ];
 
-    // Build the Grid
     const grid = document.getElementById('magazine-list');
     books.forEach((book, i) => {
         grid.innerHTML += `
@@ -24,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const book = books[index];
         document.getElementById('grid-view').classList.add('hidden');
         document.getElementById('flipbook-view').classList.remove('hidden');
-        document.getElementById('current-title').innerText = book.title;
 
         const container = document.getElementById('magazine');
         container.innerHTML = '';
@@ -38,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
         pageFlip = new St.PageFlip(container, {
             width: 1358, 
             height: 1004,
-            size: "contain", // Prevents cutting
+            size: "contain", // FIX: Stops stretching by keeping aspect ratio
             minWidth: 300,
             maxWidth: 1358,
             minHeight: 220,
@@ -55,14 +53,16 @@ document.addEventListener("DOMContentLoaded", function() {
         pageFlip.on('flip', (e) => {
             if(flipSound) { flipSound.currentTime = 0; flipSound.play(); }
             let p = e.data + 1;
-            let d = (p === 1 || isMobile) ? p : `${p}-${p + 1}`;
+            // Improved numbering for double-page spread
+            let d = (p === 1 || isMobile) ? p : (p >= book.pages ? book.pages : `${p}-${p + 1}`);
             document.getElementById('page-counter').innerText = `${d} / ${book.pages}`;
         });
     };
 
     const wrapper = document.getElementById('flipbook-wrapper');
-    document.getElementById('zoom-in').onclick = () => { zoomLevel = Math.min(3, zoomLevel + 0.3); wrapper.style.transform = `scale(${zoomLevel})`; };
-    document.getElementById('zoom-out').onclick = () => { zoomLevel = Math.max(1, zoomLevel - 0.3); wrapper.style.transform = `scale(${zoomLevel})`; };
+    document.getElementById('zoom-in').onclick = () => { zoomLevel = Math.min(3, zoomLevel + 0.3); updateZoom(); };
+    document.getElementById('zoom-out').onclick = () => { zoomLevel = Math.max(1, zoomLevel - 0.3); updateZoom(); };
+    function updateZoom() { wrapper.style.transform = `scale(${zoomLevel})`; }
 
     document.getElementById('prev-btn').onclick = () => pageFlip.flipPrev();
     document.getElementById('next-btn').onclick = () => pageFlip.flipNext();
