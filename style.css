@@ -1,29 +1,37 @@
 #flipbook-wrapper {
     transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: transform;
+    max-width: 95vw;
 }
 
-/* Force pages to match your 1358x1004 ratio */
+.st-page-flip {
+    box-shadow: 0 30px 100px rgba(0,0,0,0.8);
+    background: #111;
+}
+
 .page {
-    background-color: #1a1a1a;
+    background-color: #fff;
     width: 100%;
     height: 100%;
+    /* Creates a realistic spine shadow when the book is open */
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.1); 
 }
 
 .page img {
     width: 100%;
     height: 100%;
-    /* 'fill' ensures the 1358x1004 image fills the page exactly */
-    object-fit: fill; 
+    object-fit: fill; /* Forces your 1358x1004 to match page corners */
     display: block;
 }
 
-/* Floating shadow for premium feel */
-.st-page-flip {
-    box-shadow: 0 30px 100px rgba(0,0,0,0.8);
+/* Page corner shading during flip */
+.page-cover {
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
 }
 
 .book-card img {
     border-radius: 4px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.4);
 }
+
+::-webkit-scrollbar { width: 0px; }
