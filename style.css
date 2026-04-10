@@ -1,37 +1,29 @@
-/* Container for zoom handling */
 #flipbook-wrapper {
-    transition: transform 0.1s linear;
+    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: transform;
 }
 
-/* Page Rendering */
-.st-page-flip {
-    background-color: #111;
-}
-
-/* Page surface */
+/* Force pages to match your 1358x1004 ratio */
 .page {
-    background-color: #fff;
-    overflow: hidden;
+    background-color: #1a1a1a;
+    width: 100%;
+    height: 100%;
 }
 
 .page img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Forces the image to fill every corner */
+    /* 'fill' ensures the 1358x1004 image fills the page exactly */
+    object-fit: fill; 
+    display: block;
 }
 
-/* Hard spine effect */
-.page-cover {
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+/* Floating shadow for premium feel */
+.st-page-flip {
+    box-shadow: 0 30px 100px rgba(0,0,0,0.8);
 }
 
-/* Library Cards */
 .book-card img {
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     border-radius: 4px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
 }
-
-/* Custom Scrollbar for Library */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
