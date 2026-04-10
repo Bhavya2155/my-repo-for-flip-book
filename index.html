@@ -8,48 +8,44 @@
     <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-[#050505] text-white selection:bg-none overflow-hidden">
+<body class="bg-[#0a0a0a] text-white overflow-hidden">
 
-    <div id="grid-view" class="container mx-auto p-12 h-screen overflow-y-auto">
-        <h1 class="text-5xl font-thin tracking-tighter mb-12 uppercase text-gray-200">Library</h1>
-        <div id="magazine-list" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10"></div>
+    <div id="grid-view" class="container mx-auto p-10 h-screen overflow-y-auto">
+        <h1 class="text-3xl font-light tracking-widest mb-10 uppercase text-red-600">Library</h1>
+        <div id="magazine-list" class="grid grid-cols-2 md:grid-cols-4 gap-8"></div>
     </div>
 
-    <div id="flipbook-view" class="fixed inset-0 bg-[#050505]/95 backdrop-blur-3xl z-50 hidden flex-col items-center">
+    <div id="flipbook-view" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 hidden flex flex-col items-center">
         
         <header class="w-full flex justify-between p-6 shrink-0">
-            <button id="close-flipbook" class="text-sm font-medium tracking-widest text-gray-400 hover:text-white transition uppercase">&times; Close</button>
-            <div id="current-title" class="text-[10px] font-bold tracking-[0.4em] text-gray-500 uppercase"></div>
+            <button id="close-flipbook" class="text-xs tracking-widest text-gray-400 hover:text-white uppercase transition">&times; Close</button>
+            <div id="current-title" class="text-[10px] font-bold tracking-[0.4em] text-gray-600 uppercase"></div>
             <div class="w-10"></div>
         </header>
 
         <main id="canvas" class="flex-grow w-full flex items-center justify-center relative overflow-hidden touch-none">
-            <div id="flipbook-wrapper" class="relative shadow-[0_50px_100px_rgba(0,0,0,0.8)]">
-                <div id="magazine" class="st-page-flip">
-                    </div>
+            <div id="flipbook-wrapper" class="relative shadow-2xl">
+                <div id="magazine" class="st-page-flip"></div>
             </div>
         </main>
 
-        <footer class="h-32 w-full flex flex-col items-center justify-center shrink-0">
-            <div class="bg-white/10 border border-white/5 backdrop-blur-md rounded-2xl px-6 py-3 flex items-center gap-8 shadow-2xl">
-                <div class="flex items-center gap-4 border-r border-white/10 pr-6">
-                    <button id="prev-btn" class="text-2xl hover:text-red-500 transition-colors">&lsaquo;</button>
-                    <span id="page-counter" class="text-[11px] font-mono tracking-widest text-gray-400">01 / 32</span>
-                    <button id="next-btn" class="text-2xl hover:text-red-500 transition-colors">&rsaquo;</button>
-                </div>
-                
+        <footer class="h-32 w-full flex items-center justify-center shrink-0">
+            <div class="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl px-8 py-3 flex items-center gap-10">
                 <div class="flex items-center gap-6">
-                    <button id="zoom-out" class="text-xl opacity-50 hover:opacity-100 transition">&minus;</button>
-                    <button id="zoom-in" class="text-xl opacity-50 hover:opacity-100 transition">&plus;</button>
-                    <button id="full-screen" class="opacity-50 hover:opacity-100 transition">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M3 3h7v2H5v5H3V3zM17 3h-7v2h5v5h2V3zM3 17h7v-2H5v-5H3v7zM17 17h-7v-2h5v-5h2v7z"/></svg>
-                    </button>
+                    <button id="prev-btn" class="text-3xl hover:text-red-600 transition">&lsaquo;</button>
+                    <span id="page-counter" class="text-xs font-mono tracking-tighter text-gray-400">01 / 16</span>
+                    <button id="next-btn" class="text-3xl hover:text-red-600 transition">&rsaquo;</button>
+                </div>
+                <div class="h-6 w-[1px] bg-white/10"></div>
+                <div class="flex items-center gap-6 text-gray-400">
+                    <button id="zoom-out" class="text-2xl hover:text-white transition">&minus;</button>
+                    <button id="zoom-in" class="text-2xl hover:text-white transition">&plus;</button>
                 </div>
             </div>
         </footer>
     </div>
 
-    <audio id="flip-sound" src="flip.mp3" preload="auto"></audio>
+    <audio id="flip-sound" src="flip.mp3"></audio>
     <script src="script.js"></script>
 </body>
 </html>
