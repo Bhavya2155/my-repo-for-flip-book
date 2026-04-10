@@ -11,7 +11,7 @@
 <body class="bg-[#0a0a0a] text-white overflow-hidden">
 
     <div id="grid-view" class="container mx-auto p-10 h-screen overflow-y-auto">
-        <h1 class="text-3xl font-light tracking-widest mb-10 uppercase text-red-600">Library</h1>
+        <h1 class="text-3xl font-light tracking-widest mb-10 uppercase text-red-600">Digital Library</h1>
         <div id="magazine-list" class="grid grid-cols-2 md:grid-cols-4 gap-8"></div>
     </div>
 
@@ -24,20 +24,21 @@
         </header>
 
         <main id="canvas" class="flex-grow w-full flex items-center justify-center relative overflow-hidden touch-none">
-            <div id="flipbook-wrapper" class="relative shadow-2xl">
-                <div id="magazine" class="st-page-flip"></div>
+            <div id="flipbook-wrapper" class="relative">
+                <div id="magazine" class="st-page-flip">
+                    </div>
             </div>
         </main>
 
         <footer class="h-32 w-full flex items-center justify-center shrink-0">
             <div class="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl px-8 py-3 flex items-center gap-10">
                 <div class="flex items-center gap-6">
-                    <button id="prev-btn" class="text-3xl hover:text-red-600 transition">&lsaquo;</button>
+                    <button id="prev-btn" class="text-3xl hover:text-red-500 transition">&lsaquo;</button>
                     <span id="page-counter" class="text-xs font-mono tracking-tighter text-gray-400">01 / 16</span>
-                    <button id="next-btn" class="text-3xl hover:text-red-600 transition">&rsaquo;</button>
+                    <button id="next-btn" class="text-3xl hover:text-red-500 transition">&rsaquo;</button>
                 </div>
                 <div class="h-6 w-[1px] bg-white/10"></div>
-                <div class="flex items-center gap-6 text-gray-400">
+                <div class="flex items-center gap-6 text-gray-400 font-light">
                     <button id="zoom-out" class="text-2xl hover:text-white transition">&minus;</button>
                     <button id="zoom-in" class="text-2xl hover:text-white transition">&plus;</button>
                 </div>
@@ -45,7 +46,7 @@
         </footer>
     </div>
 
-    <audio id="flip-sound" src="flip.mp3"></audio>
+    <audio id="flip-sound" src="flip.mp3" preload="auto"></audio>
     <script src="script.js"></script>
 </body>
 </html>
