@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magazine Flipbook Library</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
+</head>
+<body class="bg-[#12161b] text-white font-sans">
+
+    <div id="grid-view" class="container mx-auto p-8">
+        <header class="mb-12">
+            <h1 class="text-5xl font-black text-red-600 uppercase tracking-tighter">Magazines</h1>
+            <p class="text-gray-400 mt-2">Select a volume to start reading</p>
+        </header>
+
+        <div id="magazine-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            </div>
+    </div>
+
+    <div id="flipbook-view" class="fixed inset-0 bg-black/95 z-50 hidden flex-col items-center justify-center p-4">
+        
+        <div class="w-full max-w-6xl flex justify-between items-center mb-6">
+            <button id="close-flipbook" class="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-full font-bold transition">
+                &larr; Back to Library
+            </button>
+            <h2 id="current-title" class="text-xl font-semibold italic text-gray-300"></h2>
+            <div class="w-24"></div> </div>
+
+        <div id="canvas" class="relative shadow-2xl">
+            <div id="flipbook">
+                </div>
+        </div>
+
+        <div class="mt-10 flex items-center gap-6 bg-gray-800/50 p-4 rounded-2xl backdrop-blur-md">
+            <button id="prev-btn" class="hover:text-red-500 font-bold text-2xl px-4">&lsaquo;</button>
+            <span id="page-counter" class="text-sm font-mono tracking-widest text-gray-400">PAGE -- / --</span>
+            <button id="next-btn" class="hover:text-red-500 font-bold text-2xl px-4">&rsaquo;</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
