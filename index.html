@@ -3,59 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Akram Express | Digital Library</title>
+    <title>Akram Express | Light Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
 </head>
-<body class="bg-[#0f1216] text-white selection:bg-red-500">
+<body class="bg-[#f8f9fa] text-[#1a1a1a] overflow-hidden">
 
-    <div id="grid-view" class="container mx-auto p-6 md:p-12">
-        <header class="mb-10 flex justify-between items-end">
-            <div>
-                <h1 class="text-4xl font-black text-red-600 uppercase italic">Magazines</h1>
-                <p class="text-gray-500 text-sm mt-1">Select a volume to read</p>
-            </div>
-            <div class="hidden md:block bg-red-600 px-3 py-1 rounded text-xs font-bold">List of AEX</div>
-        </header>
-
-        <div id="magazine-list" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            </div>
+    <div id="grid-view" class="container mx-auto p-10 h-screen overflow-y-auto">
+        <h1 class="text-4xl font-black text-[#d32f2f] mb-10 tracking-tighter italic">MAGAZINES</h1>
+        <div id="magazine-list" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8"></div>
     </div>
 
-    <div id="flipbook-view" class="fixed inset-0 bg-black z-50 hidden flex-col">
+    <div id="flipbook-view" class="fixed inset-0 bg-white/80 backdrop-blur-2xl z-50 hidden flex-col">
         
-        <nav class="flex justify-between items-center p-4 bg-gray-900/60 backdrop-blur-md">
-            <button id="close-flipbook" class="hover:text-red-500 transition text-2xl font-light">&times; Close</button>
-            <h2 id="current-title" class="text-xs md:text-sm font-bold tracking-widest uppercase opacity-70"></h2>
+        <div class="flex justify-between items-center p-6 border-b border-gray-200 bg-white/50">
+            <button id="close-flipbook" class="text-lg font-medium hover:text-red-600 transition">&larr; Exit</button>
+            <h2 id="current-title" class="text-sm font-bold tracking-widest uppercase text-gray-500"></h2>
             <div class="w-10"></div>
-        </nav>
-
-        <div id="canvas" class="flex-grow flex items-center justify-center overflow-hidden relative">
-            <div id="flipbook">
-                </div>
         </div>
 
-        <footer class="bg-gray-900/90 border-t border-gray-800 p-4 flex flex-col items-center gap-4">
-            <div class="flex items-center gap-6 bg-[#1c2229] rounded-full px-6 py-2 shadow-xl border border-gray-700">
-                <button id="prev-btn" class="text-2xl hover:text-red-500 transition">&lsaquo;</button>
-                <div id="page-counter" class="text-xs font-mono text-gray-400 min-w-[60px] text-center italic">0 / 0</div>
-                <button id="next-btn" class="text-2xl hover:text-red-500 transition">&rsaquo;</button>
+        <div id="canvas" class="flex-grow flex items-center justify-center p-4 overflow-hidden cursor-grab active:cursor-grabbing">
+            <div id="flipbook-wrapper">
+                <div id="flipbook"></div>
+            </div>
+        </div>
+
+        <div class="w-full flex flex-col items-center pb-8 gap-4 bg-white/60 shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
+            
+            <div class="flex items-center gap-10 bg-white px-8 py-3 rounded-full border border-gray-200 shadow-sm mt-4">
+                <button id="prev-btn" class="text-3xl text-gray-400 hover:text-red-600">&lsaquo;</button>
+                <span id="page-counter" class="text-xs font-bold tracking-widest text-gray-600 uppercase">Page 0 / 0</span>
+                <button id="next-btn" class="text-3xl text-gray-400 hover:text-red-600">&rsaquo;</button>
             </div>
 
-            <div class="flex items-center gap-8 text-gray-400">
-                <button id="zoom-out" class="hover:text-white text-xl" title="Zoom Out">−</button>
-                <button id="zoom-in" class="hover:text-white text-xl" title="Zoom In">+</button>
-                <button id="full-screen" class="hover:text-white" title="Toggle Fullscreen">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+            <div class="flex items-center gap-12 text-gray-500">
+                <button id="zoom-out" class="text-4xl hover:text-red-600 transition">−</button>
+                <button id="zoom-in" class="text-4xl hover:text-red-600 transition">+</button>
+                <button id="full-screen" class="hover:text-red-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
                 </button>
             </div>
-        </footer>
+        </div>
     </div>
 
     <audio id="flip-sound" src="flip.mp3" preload="auto"></audio>
-
     <script src="script.js"></script>
 </body>
 </html>
