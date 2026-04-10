@@ -15,35 +15,35 @@
         <div id="magazine-list" class="grid grid-cols-2 md:grid-cols-4 gap-8"></div>
     </div>
 
-    <div id="flipbook-view" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 hidden flex flex-col items-center">
+    <div id="flipbook-view" class="fixed inset-0 bg-black/95 z-50 hidden flex flex-col items-center">
         
-        <header class="w-full flex justify-between p-6 shrink-0">
-            <button id="close-flipbook" class="text-xs tracking-widest text-gray-400 hover:text-white uppercase transition">&times; Close</button>
-            <div id="current-title" class="text-[10px] font-bold tracking-[0.4em] text-gray-600 uppercase"></div>
-            <div class="w-10"></div>
-        </header>
+        <button id="close-flipbook" class="fixed top-6 left-6 z-[110] text-sm tracking-widest text-gray-400 hover:text-white uppercase transition flex items-center gap-2">
+            <span class="text-2xl font-light">&times;</span> Close
+        </button>
 
-        <main id="canvas" class="flex-grow w-full flex items-center justify-center relative overflow-hidden touch-none">
+        <div id="current-title" class="fixed top-8 left-1/2 -translate-x-1/2 z-[110] text-[10px] font-bold tracking-[0.4em] text-gray-600 uppercase"></div>
+
+        <main id="canvas" class="flex-grow w-full flex items-center justify-center relative overflow-hidden touch-none p-4">
             <div id="flipbook-wrapper" class="relative">
-                <div id="magazine" class="st-page-flip">
-                    </div>
+                <div id="magazine" class="st-page-flip"></div>
             </div>
         </main>
 
-        <footer class="h-32 w-full flex items-center justify-center shrink-0">
-            <div class="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl px-8 py-3 flex items-center gap-10">
-                <div class="flex items-center gap-6">
-                    <button id="prev-btn" class="text-3xl hover:text-red-500 transition">&lsaquo;</button>
-                    <span id="page-counter" class="text-xs font-mono tracking-tighter text-gray-400">01 / 16</span>
-                    <button id="next-btn" class="text-3xl hover:text-red-500 transition">&rsaquo;</button>
-                </div>
-                <div class="h-6 w-[1px] bg-white/10"></div>
-                <div class="flex items-center gap-6 text-gray-400 font-light">
-                    <button id="zoom-out" class="text-2xl hover:text-white transition">&minus;</button>
-                    <button id="zoom-in" class="text-2xl hover:text-white transition">&plus;</button>
-                </div>
+        <div class="flex flex-col items-center gap-6 pb-10 shrink-0 z-[110]">
+            <div class="flex items-center gap-8 bg-[#1a1a1a]/80 border border-white/5 backdrop-blur-md rounded-full px-6 py-2 shadow-2xl">
+                <button id="prev-btn" class="text-3xl hover:text-red-500 transition">&lsaquo;</button>
+                <span id="page-counter" class="text-[11px] font-mono tracking-widest text-gray-400 min-w-[60px] text-center">01 / 16</span>
+                <button id="next-btn" class="text-3xl hover:text-red-500 transition">&rsaquo;</button>
             </div>
-        </footer>
+
+            <div class="flex items-center gap-10 text-gray-500 font-light">
+                <button id="zoom-out" class="text-3xl hover:text-white transition">&minus;</button>
+                <button id="zoom-in" class="text-3xl hover:text-white transition">&plus;</button>
+                <button id="full-screen" class="hover:text-white transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+                </button>
+            </div>
+        </div>
     </div>
 
     <audio id="flip-sound" src="flip.mp3" preload="auto"></audio>
