@@ -8,13 +8,14 @@ document.addEventListener("DOMContentLoaded", function() {
         { folder: 'book2', title: 'The Era Back Then', pages: 16 }
     ];
 
-    // Load Grid
     const grid = document.getElementById('magazine-list');
     books.forEach((book, i) => {
         grid.innerHTML += `
             <div class="book-card cursor-pointer group" onclick="openBook(${i})">
-                <img src="books/${book.folder}/1.jpg" class="w-full group-hover:scale-105 transition-transform duration-500">
-                <p class="mt-4 text-[10px] uppercase tracking-widest text-gray-500 font-bold">${book.title}</p>
+                <div class="overflow-hidden rounded-lg">
+                    <img src="books/${book.folder}/1.jpg" class="w-full group-hover:scale-110 transition duration-500">
+                </div>
+                <p class="mt-4 text-[10px] uppercase tracking-widest text-gray-500 font-black">${book.title}</p>
             </div>`;
     });
 
@@ -27,59 +28,44 @@ document.addEventListener("DOMContentLoaded", function() {
         const container = document.getElementById('magazine');
         container.innerHTML = '';
         
+        // Inject pages
         for (let i = 1; i <= book.pages; i++) {
             const pageDiv = document.createElement('div');
             pageDiv.className = 'page';
-            pageDiv.innerHTML = `<img src="books/${book.folder}/${i}.jpg" loading="lazy">`;
+            pageDiv.innerHTML = `<img src="books/${book.folder}/${i}.jpg">`;
             container.appendChild(pageDiv);
         }
 
         const isMobile = window.innerWidth < 768;
 
+        // MATH: Calculate height based on your 1358x1004 image
+        // Width of one page is 1358, Height is 1004.
         pageFlip = new St.PageFlip(container, {
-            width: 450, // Single page width
-            height: 600, // Single page height
+            width: 1358, 
+            height: 1004,
             size: "stretch",
             minWidth: 315,
-            maxWidth: 1000,
-            minHeight: 420,
-            maxHeight: 1350,
-            maxShadowOpacity: 0.5,
-            showCover: true,
-            mobileScrollSupport: false // We use our own gesture logic
+            maxWidth: 1358,
+            minHeight: 233,
+            maxHeight: 1004,
+            showCover: false, // Set to true if 1.jpg is a lone cover
+            maxShadowOpacity: 0.3,
+            mobileScrollSupport: true
         });
 
         pageFlip.loadFromHTML(document.querySelectorAll('.page'));
 
         pageFlip.on('flip', (e) => {
-            flipSound.currentTime = 0;
-            flipSound.play();
+            if(flipSound) { flipSound.currentTime = 0; flipSound.play(); }
             document.getElementById('page-counter').innerText = `${String(e.data + 1).padStart(2, '0')} / ${book.pages}`;
         });
     };
 
-    // --- PINCH TO ZOOM & SWIPE LOGIC ---
-    let initialDist = -1;
-    const canvas = document.getElementById('canvas');
+    // Zoom Functions
     const wrapper = document.getElementById('flipbook-wrapper');
-
-    canvas.addEventListener('touchmove', (e) => {
-        if (e.touches.length === 2) {
-            let dist = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
-            if (initialDist > 0) {
-                if (dist > initialDist) zoomLevel = Math.min(3, zoomLevel + 0.05);
-                else zoomLevel = Math.max(1, zoomLevel - 0.05);
-                wrapper.style.transform = `scale(${zoomLevel})`;
-            }
-            initialDist = dist;
-        }
-    });
-
-    canvas.addEventListener('touchend', () => { initialDist = -1; });
-
-    // Zoom Buttons
-    document.getElementById('zoom-in').onclick = () => { zoomLevel = Math.min(3, zoomLevel + 0.3); wrapper.style.transform = `scale(${zoomLevel})`; };
-    document.getElementById('zoom-out').onclick = () => { zoomLevel = Math.max(1, zoomLevel - 0.3); wrapper.style.transform = `scale(${zoomLevel})`; };
+    document.getElementById('zoom-in').onclick = () => { zoomLevel = Math.min(3, zoomLevel + 0.3); updateZoom(); };
+    document.getElementById('zoom-out').onclick = () => { zoomLevel = Math.max(1, zoomLevel - 0.3); updateZoom(); };
+    function updateZoom() { wrapper.style.transform = `scale(${zoomLevel})`; }
 
     // Navigation
     document.getElementById('prev-btn').onclick = () => pageFlip.flipPrev();
