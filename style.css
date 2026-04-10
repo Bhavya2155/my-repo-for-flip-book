@@ -1,31 +1,29 @@
-/* Page shadow and feel */
+#flipbook-wrapper {
+    transition: transform 0.2s ease-out;
+    transform-origin: center center;
+}
+
+#flipbook {
+    box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+}
+
 .page {
     background-color: #fff;
-    box-shadow: inset -5px 0 20px rgba(0,0,0,0.1);
 }
 
 .page img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    -webkit-user-drag: none;
 }
 
-/* Zoom Container */
-#flipbook {
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    will-change: transform;
-}
-
-/* Hard Center the canvas */
-#canvas {
-    perspective: 2000px;
-}
-
-/* Card hover effect */
+/* Make the book cards in library look clean */
 .book-card {
-    transition: transform 0.3s ease;
+    background: white;
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
 }
+
 .book-card:hover {
-    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
 }
