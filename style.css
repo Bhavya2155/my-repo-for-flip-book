@@ -1,35 +1,37 @@
-/* Ensure the wrapper handles the zoom without cutting corners */
+/* Container for zoom handling */
 #flipbook-wrapper {
-    transition: transform 0.2s ease-out;
-    padding: 0;
-    margin: 0;
+    transition: transform 0.1s linear;
+    will-change: transform;
 }
 
-/* Remove the white border around the page */
+/* Page Rendering */
+.st-page-flip {
+    background-color: #111;
+}
+
+/* Page surface */
 .page {
-    background-color: #0d1e1e !important; /* Matches your magazine's dark teal color */
+    background-color: #fff;
     overflow: hidden;
 }
 
 .page img {
     width: 100%;
     height: 100%;
-    /* 'fill' ensures no white borders, 'cover' keeps ratio but might crop slightly */
-    object-fit: fill; 
-    display: block;
-    margin: 0;
-    padding: 0;
+    object-fit: cover; /* Forces the image to fill every corner */
 }
 
-/* Optional: Add a subtle inner shadow to the "spine" for realism */
-.page-wrapper {
-    box-shadow: 0 0 20px rgba(0,0,0,0.5) !important;
+/* Hard spine effect */
+.page-cover {
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
 }
 
-/* Hide any scrollbars caused by the zoom */
-#canvas {
-    perspective: 2000px;
-    background-color: transparent;
+/* Library Cards */
+.book-card img {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border-radius: 4px;
 }
 
-::-webkit-scrollbar { display: none; }
+/* Custom Scrollbar for Library */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
